@@ -1,11 +1,11 @@
 package main
 
 import (
-	//"flag"
 	"fmt"
 	"io/ioutil"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 
 	"github.com/bwmarrin/discordgo"
@@ -14,7 +14,10 @@ import (
 func main() {
 	dat, err := ioutil.ReadFile("token")
 	token := string(dat)
-	fmt.Print(token)
+	token = strings.Replace(token, " ", "", -1)
+	token = strings.Replace(token, "\n", "", -1)
+	token = strings.Replace(token, "\r", "", -1)
+	fmt.Print("token=" + token + "\r\n")
 	// Create a new Discord session using the provided bot token.
 	dg, err := discordgo.New("Bot " + token)
 	if err != nil {
