@@ -18,6 +18,14 @@ func main() {
 	token = strings.Replace(token, "\n", "", -1)
 	token = strings.Replace(token, "\r", "", -1)
 	fmt.Print("token=" + token + "\r\n")
+
+	dat, err = ioutil.ReadFile("debugchannel")
+	debug_channel := string(dat)
+	debug_channel = strings.Replace(debug_channel, " ", "", -1)
+	debug_channel = strings.Replace(debug_channel, "\n", "", -1)
+	debug_channel = strings.Replace(debug_channel, "\r", "", -1)
+	fmt.Print("debugChannel=" + debug_channel + "\r\n")
+
 	// Create a new Discord session using the provided bot token.
 	dg, err := discordgo.New("Bot " + token)
 	if err != nil {
@@ -35,10 +43,10 @@ func main() {
 		return
 	}
 
-	// Wait here until CTRL-C or other term signal is received.
-	fmt.Println("Bot is now running.  Press CTRL-C to exit.")
+	// Wait here until term signal is received.
+	fmt.Println("Bot is now running.")
 
-	dg.ChannelMessageSend("387582363590459412", "YUI is online now.")
+	dg.ChannelMessageSend(debug_channel, "YUI is online now.")
 
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
