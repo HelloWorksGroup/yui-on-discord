@@ -3,9 +3,8 @@
 *.dll
 *.so
 *.dylib
-token
-debugchannel
-config
+*.json
+*.jpg
 
 
 # Test binary, build with `go test -c`
